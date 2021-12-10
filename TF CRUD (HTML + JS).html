@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TF CRUD 1.0 - HTML + JS</title>    
+</head>
+<body>    
+    <form>        
+        <h1>Cadastramento</h1>
+        <div id="all_inputs_container">
+            <div class="input_container" id="name_container">
+                <span>Nome: </span>
+                <input type="text" class="input_field" name="name_input" id="name_input" placeholder="Digite seu nome" maxlength="30">                
+            </div>
+            <div class="input_container" id="tel_container">
+                <span>Telefone: </span>
+                <input type="text" class="input_field" name="tel_input" id="tel_input" placeholder="Digite seu telefone" maxlength="12">
+            </div>
+            <div class="input_container" id="birth_container">
+                <span>Nascimento: </span>
+                <input type="date" class="input_field" name="birth_input" id="birth_input">
+            </div>            
+            <div class="input_container" id="grade_container">
+                <span>Nota: </span>
+                <input type="text" class="input_field" name="grade_input" id="grade_input" maxlength="3">
+            </div>
+            <div id="btn_cotainer">
+                <input type="button" value="Cadastrar" onclick="signUp()">                
+                <input type="button" value="Remover" onclick="remove()">
+                <span id="confirm_msg"></span>
+            </div>
+        </div>
+        <hr>
+        <div id="all_outputs_container">
+            
+            <div id="list_container">
+            </div>
+        </div>
+    </form>
+<!--========================================== Inicio dos Scripts ==========================================-->
+    <script>
+        const inputs = document.getElementsByClassName("input_field");
+        const output = document.getElementById("list_container");
+        const out_confirm = document.getElementById("confirm_msg");
+        const registry = [];
+        const reg = [];
+
+        function signUp(){
+            let inputted_name = document.getElementById("name_input");
+            let inputted_tel = document.getElementById("tel_input");
+            let inputted_birth = document.getElementById("birth_input");
+            let inputted_grade = document.getElementById("grade_input");
+
+            var user = {
+                name: inputted_name.value,
+                tel: inputted_tel.value,
+                birth: inputted_birth.value,
+                grade: inputted_grade.value,
+                reg_date: reg_date(),
+                reg_edit: reg_date()        
+            };    
+            registry.push(user);
+            out_confirm.innerHTML = `${user.name} - Cadastrado com sucesso!`
+            show(user);
+            inputted_name.focus();
+            for (let item of inputs){
+                item.value = "";
+            }
+        }
+
+        function remove(id){
+            function isSet(test){
+                if (typeof(test) != typeof(NaN)){
+                    test = prompt("Valor do ID");
+                    if (test.length > 0 && parseInt(test) >= 0){
+                        id = parseInt(test);
+                        return true;
+                    } else {
+                        alert("ID inválido")
+                        return false;
+                    }
+                } else {
+                    return true;
+                }
+            }    
+            if(isSet(id)){
+                if(confirm(`Tem certeza que deseja remover ID ${Number(id)}?`)){
+                    out_confirm.innerHTML = "";
+                    registry.splice(parseInt(id), 1);
+                }
+            }
+            out_confirm.innerHTML = "";
+            show();
+        }
+
+        function edit(id){            
+            var grade = prompt("Insira nova nota")            
+            if(grade == null){
+                return false;
+            } else if (grade.length > 3){
+                alert("max 3 digitos")
+            } else {
+                registry[id].grade = grade;
+            }
+            registry[id].reg_edit = reg_date();
+            show();
+        }
+
+        function show(){
+            var array_output = "";    
+            for (var index in registry){
+                var id = parseInt(index);
+                const del = `<input type='button' value='excluir' onclick='remove(${id})'>`;
+                const edit = `<input type='button' value='editar nota' onclick='edit(${id})'>`;
+                array_output += `<span id="user_${id}">
+                    ID ${id}: <br>
+                    Nome: ${registry[index].name}<br> 
+                    Telefone: ${registry[index].tel}<br> 
+                    Nascimento: ${registry[index].birth}<br>
+                    Nota: ${registry[index].grade}<br>
+                    Data de registro: ${registry[index].reg_date}<br>
+                    Ultima edição: ${registry[index].reg_edit}<br>
+                    ${edit} | ${del} <hr>
+                    </span>
+                    `;
+            }
+            output.innerHTML = array_output    
+        }
+
+        function reg_date(){
+            var date = new Date();    
+            var day = date.getDate();
+            var month = date.getMonth();
+            var year = date.getFullYear();
+            var hours = getZeros(date.getHours());
+            var mins = getZeros(date.getMinutes());
+            var secs = getZeros(date.getSeconds());
+
+            function getZeros(zero){
+                var num = (zero < 10) ? "0" : "";
+                return num + zero;
+            }    
+            fullDate = `${day}/${month+1}/${year} às ${hours}:${mins}:${secs}`;
+
+            return fullDate;
+        }
+        
+
+    </script>    
+</body>
+</html>
