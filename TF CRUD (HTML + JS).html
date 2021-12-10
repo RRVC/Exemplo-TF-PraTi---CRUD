@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TF CRUD 1.0 - HTML + JS</title>    
+    <title>TF CRUD - HTML + JS</title>    
 </head>
 <body>    
     <form>        
@@ -33,8 +33,7 @@
             </div>
         </div>
         <hr>
-        <div id="all_outputs_container">
-            
+        <div id="all_outputs_container">            
             <div id="list_container">
             </div>
         </div>
@@ -141,12 +140,10 @@
                 var num = (zero < 10) ? "0" : "";
                 return num + zero;
             }    
-            fullDate = `${day}/${month+1}/${year} às ${hours}:${mins}:${secs}`;
+            var fullDate = `${day}/${month+1}/${year} às ${hours}:${mins}:${secs}`;
 
             return fullDate;
         }
-        
-
     </script>    
 </body>
 </html>
