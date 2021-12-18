@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TF CRUD 1.4</title>
+    <link rel="stylesheet" type="text/css" href="TF CRUD.css">
+</head>
+<body>
+    <h1>Cadastramento</h1>
+    <section>
+        <div id="all_inputs_container">
+            <h1>Dados</h1>
+
+            <div id="rng_container">
+                <input class="input_btn" type="button" value="SET RNG" onclick="set_rng()">
+                <input class="input_btn" type="button" value="UNSET" onclick="unset_fields()">
+            </div>
+
+            <div class="input_container" id="user_category">
+                <span>Você é aluno?:</span>
+                <div id="radio_buttons">
+                    <label for="sim">
+                        <input type="radio" id="sim" name="user_category" value="0"> Sim
+                    </label>
+                    <label for="não">
+                        <input type="radio" id="não" name="user_category" value="1"> Não
+                    </label>
+                </div>
+            </div>
+            <div class="input_container" id="name_container">
+                <span>Nome: </span>
+                <input type="text" class="input_field" name="name_input" id="name_input" placeholder="Digite seu nome" maxlength="30" autofocus>
+            </div>
+            <div class="input_container" id="tel_container">
+                <span>Telefone: </span>
+                <input type="text" class="input_field" name="tel_input" id="tel_input" placeholder="Digite seu telefone" maxlength="12">
+            </div>
+            <div class="input_container" id="birth_container">
+                <span>Nascimento: </span>
+                <input type="date" class="input_field" name="birth_input" id="birth_input">
+            </div>
+            <div class="input_container" id="grade_container">
+                <span>Nota: </span>
+                <input type="text" class="input_field" name="grade_input" id="grade_input" maxlength="3" style="width: 50px;">
+            </div>
+            <div class="btn_container">
+                <input class="input_btn" type="button" value="Cadastrar" onclick="signUp()">
+            </div>
+            <div class="error_msg">
+                <span class="out_msg"></span>
+            </div>
+
+        </div>
+
+<!-- ========================================================== OUTPUT DISPLAY ========================================================== -->
+
+        <div id="all_outputs_container">
+
+            <div class="registry_container" id="students_container">
+                <h1>Alunos</h1>
+                <div class="list_container">
+                </div>
+                <div class="btn_container">
+                    <input class="input_btn" type="button" onclick="reg_clear(0)" value="Limpar registro">
+                </div>
+            </div>
+
+            <div class="registry_container" id="users_container">
+                <h1>Não alunos</h1>
+                <div class="list_container">
+                </div>
+                <div class="btn_container">
+                    <input class="input_btn" type="button" onclick="reg_clear(1)" value="Limpar registro">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+<!-- ========================================================== USER EDITING ========================================================== -->
+
+    <div id="edit">
+        <div id="editing_container">
+
+            <h1 id="editing_user"></h1>
+
+            <div class="input_container" id="edit_name_container">
+                <span>Nome: </span>
+                <input type="text" class="edit_input_field" name="edit_name_input" id="edit_name_input" placeholder="Digite seu nome" maxlength="30" autofocus>
+            </div>
+            <div class="input_container" id="edit_tel_container">
+                <span>Telefone: </span>
+                <input type="text" class="edit_input_field" name="edit_tel_input" id="edit_tel_input" placeholder="Digite seu telefone" maxlength="12">
+            </div>
+            <div class="input_container" id="edit_birth_container">
+                <span>Nascimento: </span>
+                <input type="date" class="edit_input_field" name="edit_birth_input" id="edit_birth_input">
+            </div>
+            <div class="input_container" id="edit_grade_container">
+                <span>Nota: </span>
+                <input type="text" class="edit_input_field" name="edit_grade_input" id="edit_grade_input" maxlength="3" style="width: 50px;">
+            </div>
+            <div class="btn_container">
+                <input class="input_btn" type="button" value="OK" onclick="edit()">
+                <input class="input_btn" type="button" value="Cancelar" onclick="edit_menu(null,null,'none')">
+            </div>
+            <div class="error_msg">
+                <span class="out_msg"></span>
+            </div>
+
+        </div>
+    </div>
+    <script src="TF CRUD.js"> </script>
+    <footer>
+        <p>&copy; RRVTI</p>
+    </footer>
+</body>
+</html>
